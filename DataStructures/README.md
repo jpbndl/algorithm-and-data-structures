@@ -92,3 +92,117 @@ The first element added is the first one removed. Think of waiting in line at a 
 - **Removal:** O(1)
 - **Searching:** O(N)
 - **Access:** O(N)
+
+---
+
+## Trees
+
+### What is a Tree?
+
+A data structure that consist of nodes in a parent / child relationship. 
+
+**Tree terminology**
+- **Root** - The top node in a tree
+- **Parent** - A node that has one or more child nodes connected to it.
+- **Child** - A node directly connected to another node when moving away from the Root.
+- **Siblings** - A group of nodes with the same parent.
+- **Leaf** - A node with no children. 
+- **Edge** - The connection between one node and another
+
+### Kind of Trees
+- **Trees**
+- **Binary Trees**
+- **Binary Search Trees**
+
+### Lists vs Trees
+
+Lists are linear - just one path
+Trees are non-linear - there are many different paths
+
+### Common Tree Uses
+- HTML Dom
+- Network Routing
+- Artificial Intelligence
+- File directory
+- File System
+
+---
+
+## Binary Search Trees
+
+Is a type of a tree that follows: 
+
+- Every parent node has at most **two** children
+- Every node to the left of a parent node is always less than the parent
+- Every node to the right of a parent node is always greater that the parent
+
+```
+Sample Binary Tree Structure:
+        10
+       /  \
+      6    15
+     / \   / \
+    3   8 11  20
+```
+
+**Sample Tree Terminology:**
+- **Root:** Top node (10)
+- **Parent:** Node with children (10, 6, 15)
+- **Child:** Node connected below (6, 15 are children of 10)
+- **Leaf:** Node with no children (3, 8, 11, 20)
+- **Siblings:** Nodes with same parent (6 and 15)
+
+### Big O Complexity
+- **Insertion:** O(log n) (Not guaranteed. For example, a one-sided tree)
+- **Searching:** O(log n) (Not guaranteed. For example, a one-sided tree)
+
+---
+
+## Tree Traversal
+
+Visiting every node in a tree exactly once in a systematic way.
+
+### Main Approaches in Tree Traversal
+
+```
+Sample Binary Tree Structure:
+        10
+       /  \
+      6    15
+     / \   / \
+    3   8 11  20
+```
+
+#### Breadth-First Search (BFS)
+**Level by level traversal** - Visit all nodes at the same level before moving to the next level.
+
+**Order:** 10 → 6 → 15 → 3 → 8 → 11 → 20
+
+**How it works:**
+1. Start at root (10)
+2. Visit all level 1 nodes (6, 15)
+3. Visit all level 2 nodes (3, 8, 11, 20)
+
+#### Depth-First Search (DFS)
+**Go deep first** - Traverse to the deepest node before backtracking.
+
+##### In-Order (Left → Root → Right)
+**Order:** 3 → 6 → 8 → 10 → 11 → 15 → 20
+- Visit left subtree completely
+- Visit root
+- Visit right subtree completely
+- **Result:** Sorted order for BST!
+
+##### Pre-Order (Root → Left → Right)
+**Order:** 10 → 6 → 3 → 8 → 15 → 11 → 20
+- Visit root first
+- Visit left subtree
+- Visit right subtree
+- **Use case:** Creating a copy of the tree
+
+##### Post-Order (Left → Right → Root)
+**Order:** 3 → 8 → 6 → 11 → 20 → 15 → 10
+- Visit left subtree
+- Visit right subtree
+- Visit root last
+- **Use case:** Deleting nodes safely

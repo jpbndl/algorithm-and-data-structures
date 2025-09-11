@@ -1,3 +1,4 @@
+const { out } = require('../Utils/output');
 /**
  * Classes are blueprints that when created make objects known as instances
  * Classes are created with the new keyword
@@ -47,4 +48,4 @@ firstStudent.fullName()
 firstStudent.markLate();
 firstStudent.markLate();
 
-console.log(firstStudent);
+out(firstStudent)

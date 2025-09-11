@@ -19,8 +19,21 @@ This project uses JavaScript files that can be executed using the Code Runner ex
 
 ```
 algorithm-and-data-structures/
+├── BigONotation/
+│   ├── README.md          # Big O concepts and examples
+│   └── Sample.js          # Performance comparison examples
+├── DataStructures/
+│   ├── README.md          # Data structures overview
+│   ├── 1. SinglyLinkedList.js
+│   ├── 2. Stacks.js       # Stack implementation with arrays
+│   ├── 3. Queues.js       # Queue implementation
+│   └── 4. BinaryTrees.js  # Binary Search Tree
 ├── ES2015/
-│   └── syntax.js          # ES6+ syntax examples
+│   ├── Basic.js           # ES6+ syntax examples
+│   └── Point.js           # Class examples
+├── Utils/
+│   └── output.js          # JSON output helper
+├── out/                   # Generated JSON files
 └── README.md
 ```
 
@@ -33,6 +46,25 @@ algorithm-and-data-structures/
 ## Usage
 
 Each JavaScript file contains practical examples and implementations. Simply navigate to any file and run it using Code Runner to see the output and understand the concepts.
+
+### JSON Output Helper
+
+The project includes a utility for outputting data structures as JSON:
+
+```javascript
+const { out } = require('../Utils/output');
+
+// Console output only (default behavior)
+out(dataStructure);
+
+// Save to file without opening
+out(dataStructure, 'filename.json');
+
+// Save to file and open in VS Code
+out(dataStructure, 'filename.json', true);
+```
+
+Generated JSON files are saved in the `out/` directory for easy inspection and analysis.
 
 ## Learning Resources
 
