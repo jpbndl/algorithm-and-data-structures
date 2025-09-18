@@ -186,23 +186,99 @@ Sample Binary Tree Structure:
 #### Depth-First Search (DFS)
 **Go deep first** - Traverse to the deepest node before backtracking.
 
-##### In-Order (Left → Root → Right)
-**Order:** 3 → 6 → 8 → 10 → 11 → 15 → 20
-- Visit left subtree completely
-- Visit root
-- Visit right subtree completely
-- **Result:** Sorted order for BST!
+### DFS Traversal: The Power of `data.push()` Position
 
-##### Pre-Order (Root → Left → Right)
-**Order:** 10 → 6 → 3 → 8 → 15 → 11 → 20
-- Visit root first
-- Visit left subtree
-- Visit right subtree
-- **Use case:** Creating a copy of the tree
+The **position** of `data.push(node.value)` determines the traversal order:
 
-##### Post-Order (Left → Right → Root)
-**Order:** 3 → 8 → 6 → 11 → 20 → 15 → 10
-- Visit left subtree
-- Visit right subtree
-- Visit root last
-- **Use case:** Deleting nodes safely
+#### Pre-Order (Root → Left → Right)
+```javascript
+const traverse = function(node) {
+    data.push(node.value);                // ← PUSH FIRST
+    if (node.left) traverse(node.left);
+    if (node.right) traverse(node.right);
+}
+```
+**Result:** [10, 6, 3, 8, 15, 11, 20] - Process root before children
+
+#### In-Order (Left → Root → Right)
+```javascript
+const traverse = function(node) {
+    if (node.left) traverse(node.left);
+    data.push(node.value);                // ← PUSH MIDDLE
+    if (node.right) traverse(node.right);
+}
+```
+**Result:** [3, 6, 8, 10, 11, 15, 20] - **Sorted order for BST!**
+
+#### Post-Order (Left → Right → Root)
+```javascript
+const traverse = function(node) {
+    if (node.left) traverse(node.left);
+    if (node.right) traverse(node.right);
+    data.push(node.value);                // ← PUSH LAST
+}
+```
+**Result:** [3, 8, 6, 11, 20, 15, 10] - Process children before root
+
+### How Recursion "Goes Back"
+
+When a recursive function finishes, JavaScript **automatically returns** to where it was called from using the call stack. Each function "remembers" exactly where it left off - no manual "going back" required!
+
+**Key Insight:** The call stack handles all the complexity of remembering function states and returning to the correct position after each recursive call completes.
+
+### When to use BFS or DFS?
+
+Time complexity for BFS and DFS. But for space complexity, it may differ but:
+
+BFS - space complexity could be a lot more since we are storing the "data" temporarily in the memory. For instance, imagin a tree is hunder level deep.
+
+DFS - unlike BFS, we do not store the "data" temporarily.
+- **In-order** - good when you want to have a data or nodes sorted in order, from lowest to highest.
+- **Pre-order** - good when you want to make a flatten copy or duplicate the tree.
+
+## Binary Heaps
+
+Is a type of **tree**. Similar to a binary search tree, but with some different rules.
+
+- MaxBinaryHeap - parent nodes are always larger than child nodes. 
+- MinBinaryHeap - parent nodes are always smaller than child nodes.
+
+### Binary Heap Rules
+
+- Each parent has at most two child nodes
+- The value of each parent node is always greater than its child nodes
+- In a max Binary Heap the parent is greater than the children, but there are no guarantees between sibling nodes
+- A binary heap is as compact as possible. All the children of each node are as full as they can be and left children are filled out first.
+
+### Sample Binary Heap
+
+```
+Max Binary Heap:
+        41
+       /  \
+      39   33
+     / \   / \
+    18 27 12  55
+
+Array representation: [41, 39, 33, 18, 27, 12, 55]
+Index:                 0   1   2   3   4   5   6
+```
+
+**Key Properties:**
+- **Root (41)** is the maximum value
+- **Parent ≥ Children**: 41 > 39,33 | 39 > 18,27 | 33 > 12,55
+- **No sibling order**: 39 and 33 have no specific relationship
+- **Left-filled**: All levels filled left to right
+
+### Array-Based Storage
+
+Binary heaps are stored in arrays using these formulas:
+
+**For any index n:**
+- **Left child:** `2n + 1`
+- **Right child:** `2n + 2`  
+- **Parent:** `Math.floor((n-1)/2)`
+
+**Example:**
+- Index 1 (value 39): Left child at index 3 (18), Right child at index 4 (27)
+- Index 3 (value 18): Parent at index 1 (39)

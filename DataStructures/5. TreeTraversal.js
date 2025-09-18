@@ -84,16 +84,67 @@ class BinarySearchTree {
         let current = this.root;
         if (current === null) return undefined;
 
-        let visited = [];
-        var addNode = function(node) {
-            visited.push(node.value);
-            if (node.left) addNode(node.left);
-            if (node.right) addNode(node.right);
+        let data = [];
+        const traverse = function traverse(node) {
+            data.push(node.value);
+            if (node.left) traverse(node.left);
+            if (node.right) traverse(node.right);
         }
 
-        addNode(current);
-        return visited;
-    }    
+        traverse(current);
+        return data;
+    }
+
+    /**
+     * Psuedocode
+     * 1. Create a variable to store the values of nodes visited
+     * 2. Store the root of the BST in a variable called current
+     * 3. Write a helper function which accepts a node
+     *      3a. If the node has a left property, call the helper function with the left property on the node
+     *      3b. If the node has a right property, call the helper function with the right property on the node
+     *      3c. Push the value of the node to the variable that stores the values
+     *      3d. Invoke the helper function with the current variable
+     * 4. Return the array of values
+     */
+    DFSPostOrder() {
+        let current = this.root;
+        if (current == null) return undefined;
+
+        let data = [];
+        const traverse = function traverse(node) {
+            if (node.left) traverse(node.left);
+            if (node.right) traverse(node.right);
+            data.push(node.value);
+        }
+
+        traverse(current);
+        return data;
+    }
+
+    /**
+     * Psuedocode
+     * 1. Create a variable to store the values of nodes visited
+     * 2. Store the root of the BST in a variable called current
+     * 3. Write a helper function which accepts a node
+     *      3a. If the node has a left property, call the helper function with the left property on the node
+     *      3b. Push the value of the node to the variable that stores the values
+     *      3c. If the node has a right property, call the helper function with the right property on the node
+     * 4. Invoke the helper function with the current variable
+     */
+    DFSInOrder() {
+        let current = this.root;
+        if (current === null) return undefined;
+
+        let data = [];
+        const traverse = function traverse(node) {
+            if (node.left) traverse(node.left)
+            data.push(node.value);
+            if (node.right) traverse(node.right)
+        }
+
+        traverse(current)
+        return data;
+    }
 }
 
 let bst = new BinarySearchTree();
@@ -106,3 +157,4 @@ bst.insert(20);
 
 // out(bst.BFS(), 'bst-bfs.json', true);
 out(bst.DFSPreOrder());
+out(bst.DFSPostOrder());
